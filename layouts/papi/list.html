@@ -14,14 +14,14 @@
         <p>Example: td_client_id = d5b94a74-1005-485a-ba0f-c67b6d12b6ee</p>
         <p>Example: Profile API Token = 24d82a5e-59a8-48c3-b63a-996a108deaef</p>
         <form action="{{ site.Params.papi.formAction }}" method="POST">
-          <input type="text" class="form-control mb-2" id="client_id_input" name="td_client_id" placeholder="Enter Client ID">
+          <input type="text" class="form-control mb-2" id="td_ssc_id_input" name="td_client_id" placeholder="Enter Client ID">
           <input type="text" class="form-control mb-2" id="token_input" name="token" placeholder="Enter Profile API Token">
           <button type="button" class="btn btn-block btn-outline-primary rounded" id="fetch_segment_button">Fetch</button>
         </form>
       </div>
       <div class="highlight" id="resultArea"></div>
   <script>
-    var fetch_segment_func = function(clientId, token) {
+    var fetch_segment_func = function(td_ssc_id, token) {
       var td = new Treasure({
         host: 'in.treasuredata.com',
         writeKey: '',
@@ -74,22 +74,22 @@
       if (token === '') {
           // FIXME
           // default API token for Debugging
-          token = '24d82a5e-59a8-48c3-b63a-996a108deaef';
+          token = '240a8972-7c21-4d4f-a473-38cf361b2051';
       } 
 
-console.log("clientId = " + clientId);
+console.log("td_ssc_id = " + td_ssc_id);
 console.log("token = " +token);
 
       td.fetchUserSegments({
         audienceToken: [token],
-        keys: {td_client_id: clientId}
+        keys: {td_ssc_id: td_ssc_id}
       }, successCallback, errorCallback);
     }
 
     document.getElementById('fetch_segment_button').onclick = function() {
-      var clientId = document.getElementById('client_id_input').value;
+      var td_ssc_id = document.getElementById('td_ssc_id_input').value;
       var token    = document.getElementById('token_input').value;
-      fetch_segment_func(clientId, token);
+      fetch_segment_func(td_ssc_id, token);
     };
   </script>
 
